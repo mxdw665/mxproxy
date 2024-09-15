@@ -21,12 +21,12 @@
 
 运行程序时，可以使用以下命令行参数进行自定义配置：
 
-### 'server'
+### server
 ```sh
 ./mxproxy_OS_ARCH -mode="server" -controladdr="0.0.0.0:8009" -tunneladdr="0.0.0.0:8008" -visitaddr="0.0.0.0:8007"
 ```
 
-### 'client'
+### client
 ```sh
 ./mxproxy_OS_ARCH -mode="client" -remoteserveraddr="127.0.0.1:8008" -remotecontroladdr="127.0.0.1:8009" -localserveraddr="127.0.0.1:8080"
 ```
