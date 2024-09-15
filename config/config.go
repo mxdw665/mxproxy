@@ -23,6 +23,6 @@ func InitFlags() {
     flag.StringVar(&LocalServerAddr, "localserveraddr", "127.0.0.1:8080", "定义localserveraddr")
     flag.StringVar(&RemoteControlAddr, "remotecontroladdr", "127.0.0.1:8009", "定义remotecontroladdr")
     flag.StringVar(&RemoteServerAddr, "remoteserveraddr", "127.0.0.1:8008", "定义remoteserveraddr")
-    flag.StringVar(&Checkip, "checkip", "ture", "定义checkip")
+    flag.StringVar(&Checkip, "checkip", "true", "定义checkip")
     
 }
