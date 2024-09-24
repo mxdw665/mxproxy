@@ -1,28 +1,51 @@
 package config
 
 import (
-    "flag"
+	"io/ioutil"
+	"log"
+
+	"gopkg.in/yaml.v2"
 )
 
-var ControlAddr string
-var VisitAddr string
-var TunnelAddr string
-var Mode string
-var RemoteIP string
-var LocalServerAddr string
-var RemoteServerAddr string
-var RemoteControlAddr string
-var Checkip string
+type Config struct {
+	Client Client `yaml:"client"`
+	Server Server `yaml:"server"`
+	Other  Other  `yaml:"other"`
+}
 
-func InitFlags() {
+type Client struct {
+	LocalServerAddr   string `yaml:"LocalServerAddr"`
+	RemoteServerAddr  string `yaml:"RemoteServerAddr"`
+	RemoteControlAddr string `yaml:"RemoteControlAddr"`
+}
 
-    flag.StringVar(&ControlAddr, "controladdr", "", "定义controlAddr")
-    flag.StringVar(&TunnelAddr, "tunneladdr", "", "定义tunnelAddr")
-    flag.StringVar(&VisitAddr, "visitaddr", "", "定义visitAddr")
-    flag.StringVar(&Mode, "mode", "server", "定义mode")
-    flag.StringVar(&LocalServerAddr, "localserveraddr", "127.0.0.1:8080", "定义localserveraddr")
-    flag.StringVar(&RemoteControlAddr, "remotecontroladdr", "127.0.0.1:8009", "定义remotecontroladdr")
-    flag.StringVar(&RemoteServerAddr, "remoteserveraddr", "127.0.0.1:8008", "定义remoteserveraddr")
-    flag.StringVar(&Checkip, "checkip", "true", "定义checkip")
-    
+type Server struct {
+	ControlAddr string `yaml:"ControlAddr"`
+	TunnelAddr  string `yaml:"TunnelAddr"`
+	VisitAddr   string `yaml:"VisitAddr"`
+}
+
+type Other struct {
+	Checkip string `yaml:"Checkip"`
+	Mode    string `yaml:"Mode"`
+}
+
+// 定义一个全局变量来存储配置
+var config Config
+
+func LoadConfig() {
+	yamlFile, err := ioutil.ReadFile("config.yaml")
+	if err != nil {
+		log.Fatalf("无法读取 YAML 文件: %v", err)
+	}
+
+	err = yaml.Unmarshal(yamlFile, &config)
+	if err != nil {
+		log.Fatalf("无法解析 YAML 文件: %v", err)
+	}
+}
+
+// 提供一个方法来获取配置
+func GetConfig() Config {
+	return config
 }

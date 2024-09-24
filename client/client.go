@@ -11,12 +11,12 @@ import (
 )
 
 func Main() {
-   tcpConn, err := network.CreateTCPConn(config.RemoteControlAddr)
+   tcpConn, err := network.CreateTCPConn(config.GetConfig().Client.RemoteControlAddr)
    if err != nil {
-      log.Println("[连接失败]" + config.RemoteControlAddr + err.Error())
+      log.Println("[连接失败]" + config.GetConfig().Client.RemoteControlAddr + err.Error())
       return
    }
-   log.Println("[已连接]" + config.RemoteControlAddr)
+   log.Println("[已连接]" + config.GetConfig().Client.RemoteControlAddr)
 
    reader := bufio.NewReader(tcpConn)
    for {
@@ -31,7 +31,7 @@ func Main() {
       }
    }
 
-   log.Println("[已断开]" + config.RemoteControlAddr)
+   log.Println("[已断开]" + config.GetConfig().Client.RemoteControlAddr)
 }
 
 func connectLocalAndRemote() {
@@ -51,7 +51,7 @@ func connectLocalAndRemote() {
 }
 
 func connectLocal() *net.TCPConn {
-   conn, err := network.CreateTCPConn(config.LocalServerAddr)
+   conn, err := network.CreateTCPConn(config.GetConfig().Client.LocalServerAddr)
    if err != nil {
       log.Println("[连接本地服务失败]" + err.Error())
    }
@@ -59,7 +59,7 @@ func connectLocal() *net.TCPConn {
 }
 
 func connectRemote() *net.TCPConn {
-   conn, err := network.CreateTCPConn(config.RemoteServerAddr)
+   conn, err := network.CreateTCPConn(config.GetConfig().Client.RemoteServerAddr)
    if err != nil {
       log.Println("[连接远端服务失败]" + err.Error())
    }

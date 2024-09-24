@@ -1,0 +1,13 @@
+client:                              # 客户端配置
+  LocalServerAddr: "127.0.0.1:8080"  # 本地服务地址
+  RemoteServerAddr: "192.168.1.100:9090"  # 远程服务器隧道地址
+  RemoteControlAddr: "192.168.1.100:5000"  # 远程控制地址
+
+server:                              # 服务器配置
+  ControlAddr: "0.0.0.0:6000"       # 控制地址
+  TunnelAddr: "0.0.0.0:7000"        # 隧道地址
+  VisitAddr: "0.0.0.0:8000"         # 访问地址
+
+other:                               # 其他配置
+  Checkip: "true"                   # IP 检查开关("true"或"false")
+  Mode: "server"                    # 启动模式("server"或"client")

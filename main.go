@@ -1,7 +1,6 @@
 package main
 
 import (
-    "flag"
     "fmt"
     "io/ioutil"
     "net/http"
@@ -12,19 +11,16 @@ import (
 )
 
 func main() {
-    fmt.Println("欢迎使用mxproxy，软件开发中，有bug欢迎去反馈，github: https://github.com/mxdw665/mxproxy")
-    config.InitFlags()
-    flag.Parse()
-    
-    if config.Checkip == "true" {
+    fmt.Println("欢迎使用mxproxy，软件开发中，有bug欢迎去反馈https://github.com/mxdw665/mxproxy/issues")
+    config.LoadConfig()
+    if config.GetConfig().Other.Checkip == "true" {
         checkip()
     }
-    
     start()
 }
 
 func start() {
-    switch config.Mode {
+    switch config.GetConfig().Other.Mode {
     case "server":
         server.Main()
     case "client":

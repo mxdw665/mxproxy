@@ -33,12 +33,12 @@ func Main() {
 
 // 创建一个控制通道，用于传递控制消息，如：心跳，创建新连接
 func createControlChannel() {
-   tcpListener, err := network.CreateTCPListener(config.ControlAddr)
+   tcpListener, err := network.CreateTCPListener(config.GetConfig().Server.ControlAddr)
    if err != nil {
       panic(err)
    }
 
-   log.Println("[已监听]" + config.ControlAddr)
+   log.Println("[已监听]" + config.GetConfig().Server.ControlAddr)
    for {
       tcpConn, err := tcpListener.AcceptTCP()
       if err != nil {
@@ -77,7 +77,7 @@ func keepAlive() {
 
 // 监听来自用户的请求
 func acceptUserRequest() {
-   tcpListener, err := network.CreateTCPListener(config.VisitAddr)
+   tcpListener, err := network.CreateTCPListener(config.GetConfig().Server.VisitAddr)
    if err != nil {
       panic(err)
    }
@@ -115,7 +115,7 @@ func sendMessage(message string) {
 
 // 接收客户端来的请求并建立隧道
 func acceptClientRequest() {
-   tcpListener, err := network.CreateTCPListener(config.TunnelAddr)
+   tcpListener, err := network.CreateTCPListener(config.GetConfig().Server.TunnelAddr)
    if err != nil {
       panic(err)
    }
