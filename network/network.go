@@ -6,11 +6,6 @@ import (
    "net"
 )
 
-const (
-   KeepAlive     = "KEEP_ALIVE"
-   NewConnection = "NEW_CONNECTION"
-)
-
 func CreateTCPListener(addr string) (*net.TCPListener, error) {
    tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
    if err != nil {
